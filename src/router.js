@@ -1,7 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import GiveAwaysView from "./views/GiveAwaysView.vue";
+import GiveAwaysList from "./views/GiveAwaysList";
+import GiveAway from "./views/GiveAway";
+import Callback from "./components/Callback";
 
 Vue.use(Router);
 
@@ -14,9 +16,21 @@ export default new Router({
       component: Home
     },
     {
-      path: "/list",
+      path: "/giveaways",
       name: "list",
-      component: GiveAwaysView
+      component: GiveAwaysList,
+      props: true
+    },
+    {
+      path: "/giveaways/:id",
+      name: "giveaway",
+      component: GiveAway,
+      props: true
+    },
+    {
+      path: "/callback",
+      name: "callback",
+      component: Callback
     },
     {
       path: "/about",
