@@ -49,10 +49,11 @@ class AuthService extends EventEmitter {
     localLogin(authResult) {
 
         if (authResult.meta.code == 200) {
+            authResult.data.instagram_id = authResult.data.id;
+            delete authResult.data.id;
             this.profile = authResult.data;
 
             localStorage.setItem(localStorageKey, 'true');
-            localStorage.setItem('profile', JSON.stringify(authResult.data));
 
             this.emit(loginEvent, {
                 loggedIn: true,
@@ -64,6 +65,8 @@ class AuthService extends EventEmitter {
 
     logOut() {
         localStorage.removeItem(localStorageKey);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('profile');
 
         this.idToken = null;
         this.tokenExpiry = null;

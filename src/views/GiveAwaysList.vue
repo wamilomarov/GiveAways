@@ -8,7 +8,24 @@
           :key="giveaway.id"
           :giveawayData="giveaway"
         ></GiveAwayCard>
+        <div class="text-xs-center">
+          <v-pagination
+                  v-model="page"
+                  :length="6"
+          ></v-pagination>
+        </div>
       </v-flex>
+      <v-btn
+              fixed
+              dark
+              fab
+              bottom
+              right
+              color="pink"
+              @click="createGiveAwayForm"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
     </v-layout>
   </v-container>
 </template>
@@ -16,11 +33,17 @@
 <script>
 import GiveAwayCard from "@/components/GiveAwayCard.vue";
 import DateRangePicker from "../components/DateRangePicker";
+import router from "../router";
 
 export default {
   components: {
     DateRangePicker,
     GiveAwayCard
+  },
+  methods:{
+    createGiveAwayForm(){
+      router.push("/create");
+    }
   },
   data() {
     return {

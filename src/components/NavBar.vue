@@ -1,7 +1,9 @@
 <template>
     <v-toolbar app>
         <v-toolbar-title class="headline text-uppercase">
-            <span class="font-weight-light">Give Aways</span>
+            <router-link :to="{ name: 'list' }" tag="button" class="font-weight-light">
+                Give Aways
+            </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
@@ -39,7 +41,7 @@
     export default {
         name: "NavBar",
         computed: {
-            profile(){
+            profile() {
                 return this.$auth.profile;
             }
         },
@@ -47,10 +49,10 @@
             isAuthenticated: Boolean
         },
         methods: {
-            authenticate(){
+            authenticate() {
                 window.location.replace("https://api.instagram.com/oauth/authorize/?client_id=8f587eb53ac14708b6da20ef49ab9f95&redirect_uri=http://localhost:8080/callback&response_type=token");
             },
-            logout(){
+            logout() {
                 this.$auth.logOut();
             }
         }

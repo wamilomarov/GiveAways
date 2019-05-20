@@ -20,7 +20,7 @@
                             v-on="on"
                     ></v-text-field>
                 </template>
-                <v-date-picker v-model="fromDate" @input="from = false"></v-date-picker>
+                <v-date-picker v-model="fromDate" @input="fromDateChanged"></v-date-picker>
             </v-menu>
         </v-flex>
         <v-spacer></v-spacer>
@@ -44,7 +44,7 @@
                             v-on="on"
                     ></v-text-field>
                 </template>
-                <v-date-picker v-model="toDate" @input="to = false" :allowed-dates="allowedDates"></v-date-picker>
+                <v-date-picker v-model="toDate" @input="toDateChanged" :allowed-dates="allowedDates"></v-date-picker>
             </v-menu>
 
         </v-flex>
@@ -61,8 +61,25 @@
             from: false,
             to: false,
         }),
+        fromDateValue: new Date().toISOString().substr(0, 10),
+        toDateValue: new Date().toISOString().substr(0, 10),
         methods: {
-            allowedDates (val) {return new Date(val) > new Date(this.fromDate)}
+            allowedDates (val) {return new Date(val) > new Date(this.fromDate)},
+            getStartDate(){
+                console.log(this.fromDate);
+                return new Date(this.fromDate);
+            },
+            getEndDate(){
+                return new Date(this.toDate);
+            },
+            fromDateChanged(date) {
+                this.fromDateValue = date;
+                this.from = false
+            },
+            toDateChanged(date) {
+                this.toDateValue = date;
+                this.to = false
+            }
         }
 
     }
